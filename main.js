@@ -5,4 +5,8 @@
 // 如果你想寫翻譯外掛，相信這個會對你有用的！
 document.addEventListener('mouseup',function(e){
 	console.log( window.getSelection().toString() );
+
+	// 似乎不用偵測 JQuery 是否準備好
+	var thisPageAsText=$(document).find('body').text();
+	console.log(thisPageAsText);
 });
