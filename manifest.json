@@ -11,8 +11,8 @@
 		{
 			"matches" : ["<all_urls>"],				// 參考 http://developer.chrome.com/extensions/match_patterns.html
 			"js": [
-				"main.js",							// 類似 Insert 一個 main.js 到每一個網頁內
-				"jquery-1.10.2.min.js"
+				"jquery-1.10.2.min.js",				// js 有載入順序必須先放 Library 最後再載入你自己的腳本
+				"main.js"							// 類似 Insert 一個 main.js 到每一個網頁內
 			],
 			"run_at": "document_start",
 			"all_frames": true				
