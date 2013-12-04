@@ -7,15 +7,37 @@ $(document).ready(function(e){
 	console.log('JQuery is Finished!',$);
 
 	// 如果你想寫翻譯外掛，相信這個會對你有用的！
-	document.addEventListener('mouseup',function(e){
+	//document.addEventListener('mouseup',function(e){
+	$('body').mouseup(function(e){
+		// 設定好Ref
+		var me=e;
+		
 		// 得到目前框選文字的 Handle
-		console.log( window.getSelection().toString() );
+		var selectText=window.getSelection().toString();
 
-		// 似乎不用偵測 JQuery 是否準備好
-		var thisPageAsText=$(document).find('body').text();
-		console.log(thisPageAsText);
+		// 移除當前頁面上的翻譯視窗
+		$('div.popInfoBox').remove();
 
-		// 可以用此方法做出網路辭典
-		$('body').append($('<p>'+window.getSelection().toString()+'</p>'));
+		// 要選到有文字才執行
+		if(selectText.trim().length>0){
+
+			// 可以用此方法做出網路辭典
+			var infobox=$('<div></div>').css({
+				position:'absolute',
+				left:me.pageX,
+				top:me.pageY,
+				backgroundColor:'silver',
+				borderRadius:10,
+				padding:5,
+				width:300
+			}).addClass('popInfoBox');
+			infobox.text(window.getSelection().toString());
+
+			// 進入場景
+			$('body').append(infobox);
+		}
+
+		// 開發除錯
+		// debugger;
 	});
 });
