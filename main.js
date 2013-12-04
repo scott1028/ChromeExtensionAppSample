@@ -3,6 +3,10 @@
 */
 
 $(document).ready(function(e){
+	// 紀錄框選座標
+	var mouseDownPos={x:0,y:0};
+	var mouseUpPos={x:0,y:0};
+
 	// 驗證 JQuery
 	console.log('JQuery is Finished!',$);
 
@@ -11,6 +15,10 @@ $(document).ready(function(e){
 	$('body').mouseup(function(e){
 		// 設定好Ref
 		var me=e;
+
+		// 紀錄座標
+		mouseUpPos.x=me.pageX;
+		mouseUpPos.y=me.pageY;
 		
 		// 得到目前框選文字的 Handle
 		var selectText=window.getSelection().toString();
@@ -20,15 +28,38 @@ $(document).ready(function(e){
 
 		// 要選到有文字才執行
 		if(selectText.trim().length>0){
+			// 訊息方塊的顯示位置
+			var infoboxPos={x:0,y:0};
+
+			// 計算出適當的位置
+			if(mouseUpPos.x>mouseDownPos.x){
+				infoboxPos.x=mouseDownPos.x;
+			}
+			else{
+				infoboxPos.x=mouseUpPos.x;	
+			}
+
+			if(mouseUpPos.y>mouseDownPos.y){
+				infoboxPos.y=mouseUpPos.y;
+			}
+			else{
+				infoboxPos.y=mouseDownPos.y;
+			}
+
+			// Debug
+			console.log('=>');
+			console.log('\tmouseDown:',mouseDownPos);
+			console.log('\tmouseUp:',mouseUpPos);
+			console.log('\tinfoboxSet:',infoboxPos);
 
 			// 可以用此方法做出網路辭典
 			var infobox=$('<div></div>').css({
 				position:'absolute',
-				left:me.pageX,
-				top:me.pageY,
+				left:infoboxPos.x,
+				top:infoboxPos.y,
 				backgroundColor:'silver',
 				borderRadius:10,
-				padding:5,
+				padding:10,
 				width:300
 			}).addClass('popInfoBox');
 			infobox.text(window.getSelection().toString());
@@ -39,5 +70,14 @@ $(document).ready(function(e){
 
 		// 開發除錯
 		// debugger;
+	});
+
+	$('body').mousedown(function(e){
+		// 設定好Ref
+		var me=e;
+
+		// 紀錄座標
+		mouseDownPos.x=me.pageX;
+		mouseDownPos.y=me.pageY;
 	});
 });
