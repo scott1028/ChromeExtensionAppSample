@@ -46,4 +46,10 @@ chrome.app.runtime.onLaunched.addListener(function() {
     var notice = new Notification(obj.data.message);
   });
 
+  Notification.requestPermission(function (permission) {
+    // If the user accepts, let's create a notification
+    if (permission === "granted") {
+      console.log('OK');
+    }
+  });
 });
