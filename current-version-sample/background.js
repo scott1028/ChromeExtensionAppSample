@@ -39,10 +39,11 @@ chrome.app.runtime.onLaunched.addListener(function() {
     chrome.gcm.register(senderIds, registerCallback);
   });
 
-  chrome.gcm.onMessage.addListener(function(message) {
+  chrome.gcm.onMessage.addListener(function(obj) {
     // A message is an object with a data property that
     // consists of key-value pairs.
-    console.log(message);
+    console.log(obj);
+    var notice = new Notification(obj.data.message);
   });
 
 });
