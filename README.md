@@ -8,3 +8,5 @@
 #### GCM Client
 
 1. 可以用 Registration 來收簡訊或用 Subscribe Topic 來收簡訊。
+
+- P.S Chrome App 有分 Background JS 跟 Frontend JS！兩個皆可以用 chrome app extension api。
